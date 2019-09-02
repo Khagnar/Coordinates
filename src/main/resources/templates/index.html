@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <h3>Input coordinates</h3>
+        <form action="#" th:action="@{/coordinates}" th:object="${geoLocation}" method="post">
+            <p>Latitude</p>
+            <input type="text" th:field="*{latitude}"><br />
+            <p>Longitude</p>
+            <input type="text" th:field="*{longitude}"><br />
+            <button type="submit">Submit</button><br />
+        </form>
+    </div>
+
+</body>
+</html>
