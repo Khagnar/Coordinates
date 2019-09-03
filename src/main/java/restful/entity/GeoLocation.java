@@ -1,10 +1,13 @@
 package restful.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "geo_location")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GeoLocation {
 
     private long geoLocationId;
@@ -14,7 +17,7 @@ public class GeoLocation {
     private double latitude;
     private double longitude;
     private String displayName;
-    private String country;
+    private Address address;
 
     public GeoLocation() {
     }
@@ -31,6 +34,7 @@ public class GeoLocation {
     }
 
     @Column(name = "osm_id")
+    @JsonProperty("osm_id")
     public long getOsmId() {
         return osmId;
     }
@@ -40,6 +44,7 @@ public class GeoLocation {
     }
 
     @Column(name = "osm_type")
+    @JsonProperty("osm_type")
     public String getOsmType() {
         return osmType;
     }
@@ -58,6 +63,7 @@ public class GeoLocation {
     }
 
     @Column
+    @JsonProperty("lat")
     public double getLatitude() {
         return latitude;
     }
@@ -67,6 +73,7 @@ public class GeoLocation {
     }
 
     @Column
+    @JsonProperty("lon")
     public double getLongitude() {
         return longitude;
     }
@@ -76,6 +83,7 @@ public class GeoLocation {
     }
 
     @Column(name = "display_name")
+    @JsonProperty("display_name")
     public String getDisplayName() {
         return displayName;
     }
@@ -84,13 +92,13 @@ public class GeoLocation {
         this.displayName = displayName;
     }
 
-    @Column
-    public String getCountry() {
-        return country;
+    @Embedded
+    public Address getAddress() {
+        return address;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
@@ -102,15 +110,15 @@ public class GeoLocation {
                 osmId == that.osmId &&
                 Double.compare(that.latitude, latitude) == 0 &&
                 Double.compare(that.longitude, longitude) == 0 &&
-                osmType.equals(that.osmType) &&
-                Objects.equals(type, that.type) &&
+                Objects.equals(osmType, that.osmType) &&
+                type.equals(that.type) &&
                 displayName.equals(that.displayName) &&
-                Objects.equals(country, that.country);
+                address.equals(that.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(geoLocationId, osmId, osmType, type, latitude, longitude, displayName, country);
+        return Objects.hash(geoLocationId, osmId, osmType, type, latitude, longitude, displayName, address);
     }
 
     @Override
@@ -123,7 +131,7 @@ public class GeoLocation {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", displayName='" + displayName + '\'' +
-                ", country='" + country + '\'' +
+                ", address=" + address +
                 '}';
     }
 }

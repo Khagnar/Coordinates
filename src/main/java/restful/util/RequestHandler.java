@@ -3,8 +3,7 @@ package restful.util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
-import restful.json_object.Location;
-
+import restful.entity.GeoLocation;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -26,13 +25,13 @@ public class RequestHandler {
         return response.getBody();
     }
 
-    public static Location getGeoLocation(String response) {
-        Location location = null;
+    public static GeoLocation getGeoLocation(String response) {
+        GeoLocation geoLocation = null;
         try {
-             location = new ObjectMapper().readValue(response, Location.class);
+             geoLocation = new ObjectMapper().readValue(response, GeoLocation.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return location;
+        return geoLocation;
     }
 }
