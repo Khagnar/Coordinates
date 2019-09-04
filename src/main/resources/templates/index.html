@@ -7,14 +7,18 @@
 </head>
 <body>
     <div>
-        <h3>Input coordinates</h3>
+        <h2>Input coordinates</h2>
         <form action="#" th:action="@{/coordinates}" th:object="${geoLocation}" method="post">
             <p>Latitude</p>
             <input type="text" th:field="*{latitude}"><br />
             <p>Longitude</p>
             <input type="text" th:field="*{longitude}"><br />
-            <button type="submit">Submit</button><br />
+            <button type="submit">Submit</button>
         </form>
+    </div>
+    <div>
+
+        <button type="button" onclick="location.href='/coordinates/list'">List of all Geo Locations</button>
     </div>
 
 </body>

@@ -1,40 +1,33 @@
-package restful.entity;
+package restful.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "geo_location")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GeoLocation {
+public class GeoLocationDTO {
 
-    private long geoLocationId;
+    @JsonProperty("osm_id")
     private long osmId;
+
+    @JsonProperty("osm_type")
     private String osmType;
     private String type;
+
+    @JsonProperty("lat")
     private double latitude;
+
+    @JsonProperty("lon")
     private double longitude;
+
+    @JsonProperty("display_name")
     private String displayName;
-    private Address address;
 
-    public GeoLocation() {
+    private AddressDTO address;
+
+    public GeoLocationDTO() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    public long getGeoLocationId() {
-        return geoLocationId;
-    }
-
-    public void setGeoLocationId(long geoLocationId) {
-        this.geoLocationId = geoLocationId;
-    }
-
-    @Column(name = "osm_id")
-    @JsonProperty("osm_id")
     public long getOsmId() {
         return osmId;
     }
@@ -43,8 +36,6 @@ public class GeoLocation {
         this.osmId = osmId;
     }
 
-    @Column(name = "osm_type")
-    @JsonProperty("osm_type")
     public String getOsmType() {
         return osmType;
     }
@@ -53,7 +44,6 @@ public class GeoLocation {
         this.osmType = osmType;
     }
 
-    @Column
     public String getType() {
         return type;
     }
@@ -62,8 +52,6 @@ public class GeoLocation {
         this.type = type;
     }
 
-    @Column
-    @JsonProperty("lat")
     public double getLatitude() {
         return latitude;
     }
@@ -72,8 +60,6 @@ public class GeoLocation {
         this.latitude = latitude;
     }
 
-    @Column
-    @JsonProperty("lon")
     public double getLongitude() {
         return longitude;
     }
@@ -82,8 +68,6 @@ public class GeoLocation {
         this.longitude = longitude;
     }
 
-    @Column(name = "display_name")
-    @JsonProperty("display_name")
     public String getDisplayName() {
         return displayName;
     }
@@ -92,12 +76,11 @@ public class GeoLocation {
         this.displayName = displayName;
     }
 
-    @Embedded
-    public Address getAddress() {
+    public AddressDTO getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressDTO address) {
         this.address = address;
     }
 
@@ -105,9 +88,8 @@ public class GeoLocation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GeoLocation that = (GeoLocation) o;
-        return geoLocationId == that.geoLocationId &&
-                osmId == that.osmId &&
+        GeoLocationDTO that = (GeoLocationDTO) o;
+        return osmId == that.osmId &&
                 Double.compare(that.latitude, latitude) == 0 &&
                 Double.compare(that.longitude, longitude) == 0 &&
                 Objects.equals(osmType, that.osmType) &&
@@ -118,13 +100,12 @@ public class GeoLocation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(geoLocationId, osmId, osmType, type, latitude, longitude, displayName, address);
+        return Objects.hash(osmId, osmType, type, latitude, longitude, displayName, address);
     }
 
     @Override
     public String toString() {
-        return "GeoLocation{" +
-                "geoLocationId=" + geoLocationId +
+        return "GeoLocationDTO{" +
                 ", osmId=" + osmId +
                 ", osmType='" + osmType + '\'' +
                 ", type='" + type + '\'' +
@@ -135,3 +116,4 @@ public class GeoLocation {
                 '}';
     }
 }
+

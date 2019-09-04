@@ -1,11 +1,10 @@
 package restful.service;
 
-import restful.entity.GeoLocation;
-
+import restful.dto.GeoLocationDTO;
 import java.util.List;
 
 public interface GeoLocationService {
 
-    List<GeoLocation> getAllGeoLocation();
-    void addGeoLocation(GeoLocation geoLocation);
+    List<GeoLocationDTO> getAllGeoLocations();
+    GeoLocationDTO addGeoLocation(GeoLocationDTO geoLocationDTO);
 }
