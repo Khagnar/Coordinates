@@ -17,7 +17,7 @@ import java.util.List;
 public class GeoLocationController {
 
     private GeoLocationService geoLocationService;
-    private List<GeoLocationDTO> listDTO = new ArrayList<>();
+//    private List<GeoLocationDTO> listDTO = new ArrayList<>();
 
     public GeoLocationController(GeoLocationService geoLocationService) {
         this.geoLocationService = geoLocationService;
@@ -40,14 +40,14 @@ public class GeoLocationController {
         geoLocationDTO = RequestHandler.getGeoLocation(result);
 
         geoLocationService.addGeoLocation(geoLocationDTO);
-        listDTO.add(geoLocationDTO);
+//        listDTO.add(geoLocationDTO);
 
         return "result";
     }
 
     @GetMapping(path = "/list")
-    public String geoLocationList() {
-
+    public String geoLocationList(Model model) {
+        model.addAttribute("listDTO", geoLocationService.getAllGeoLocations());
         return "list";
     }
 }
