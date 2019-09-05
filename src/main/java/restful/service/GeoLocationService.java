@@ -4,7 +4,7 @@ import restful.dto.GeoLocationDTO;
 import java.util.List;
 
 public interface GeoLocationService {
-
     List<GeoLocationDTO> getAllGeoLocations();
-    GeoLocationDTO addGeoLocation(GeoLocationDTO geoLocationDTO);
+    void addGeoLocation(GeoLocationDTO geoLocationDTO);
+    List<GeoLocationDTO> getAllGeoLocationsByCountry(String country);
 }

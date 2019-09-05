@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all requests</title>
+</head>
+<body>
+    <div>
+        <h2>All requests</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>OSM_ID</th>
+                <th>OSM_Type</th>
+                <th>Type</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Country</th>
+                <th>Display_name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="geoLocation : ${countryList}">
+                <td th:text="${geoLocation.getOsmId()}">OSM_ID</td>
+                <td th:text="${geoLocation.getOsmType()}">OSM_Type</td>
+                <td th:text="${geoLocation.getType()}">Type</td>
+                <td th:text="${geoLocation.getLatitude()}">Latitude</td>
+                <td th:text="${geoLocation.getLongitude()}">Longitude</td>
+                <td th:text="${geoLocation.getAddress().getCountry()}">Country</td>
+                <td th:text="${geoLocation.getDisplayName()}">Display_name</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <button type="button" onclick="location.href='/'">Return to the Main page</button>
+    </div>
+</body>
+</html>

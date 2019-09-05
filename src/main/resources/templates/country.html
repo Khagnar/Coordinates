@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Geo Locations of the Country</title>
+</head>
+<body>
+    <div>
+        <h2>Geo Locations of the Country</h2>
+        <form action="#" th:action="@{/country}" th:object="${address}" method="post">
+            <div>
+                <p>Input the country</p>
+                <input type="text" th:field="*{country}"><br />
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div>
+        <button type="button" onclick="location.href='/'">Return to the Main page</button>
+    </div>
+</body>
+</html>
