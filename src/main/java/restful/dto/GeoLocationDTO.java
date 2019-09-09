@@ -7,6 +7,8 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GeoLocationDTO {
 
+    private long geoLocationId;
+
     @JsonProperty("osm_id")
     private long osmId;
 
@@ -26,6 +28,14 @@ public class GeoLocationDTO {
     private AddressDTO address;
 
     public GeoLocationDTO() {
+    }
+
+    public long getGeoLocationId() {
+        return geoLocationId;
+    }
+
+    public void setGeoLocationId(long geoLocationId) {
+        this.geoLocationId = geoLocationId;
     }
 
     public long getOsmId() {
@@ -89,23 +99,25 @@ public class GeoLocationDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GeoLocationDTO that = (GeoLocationDTO) o;
-        return osmId == that.osmId &&
+        return geoLocationId == that.geoLocationId &&
+                osmId == that.osmId &&
                 Double.compare(that.latitude, latitude) == 0 &&
                 Double.compare(that.longitude, longitude) == 0 &&
-                Objects.equals(osmType, that.osmType) &&
-                type.equals(that.type) &&
+                osmType.equals(that.osmType) &&
+                Objects.equals(type, that.type) &&
                 displayName.equals(that.displayName) &&
                 address.equals(that.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(osmId, osmType, type, latitude, longitude, displayName, address);
+        return Objects.hash(geoLocationId, osmId, osmType, type, latitude, longitude, displayName, address);
     }
 
     @Override
     public String toString() {
         return "GeoLocationDTO{" +
+                "geoLocationId=" + geoLocationId +
                 ", osmId=" + osmId +
                 ", osmType='" + osmType + '\'' +
                 ", type='" + type + '\'' +

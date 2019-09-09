@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import restful.dto.AddressDTO;
 import restful.dto.GeoLocationDTO;
 import restful.service.GeoLocationService;
-import restful.util.RequestHandler;
-
+import restful.service.NominatimService;
 import java.util.List;
 
 @RequestMapping(path = "/")
@@ -18,9 +17,11 @@ import java.util.List;
 public class GeoLocationController {
 
     private GeoLocationService geoLocationService;
+    private NominatimService nominatimService;
 
-    public GeoLocationController(GeoLocationService geoLocationService) {
+    public GeoLocationController(GeoLocationService geoLocationService, NominatimService nominatimService) {
         this.geoLocationService = geoLocationService;
+        this.nominatimService = nominatimService;
     }
 
     @GetMapping
@@ -41,8 +42,8 @@ public class GeoLocationController {
         double latitude = geoLocationDTO.getLatitude();
         double longitude = geoLocationDTO.getLongitude();
 
-        String result = RequestHandler.getJsonResponce(latitude, longitude);
-        geoLocationDTO = RequestHandler.getGeoLocation(result);
+        String result = nominatimService.getJsonResponse(latitude, longitude);
+        geoLocationDTO = nominatimService.getGeoLocation(result);
 
         geoLocationService.addGeoLocation(geoLocationDTO);
         return "result";
@@ -67,6 +68,4 @@ public class GeoLocationController {
         model.addAttribute("listDTO", geoLocationService.getAllGeoLocations());
         return "list";
     }
-
-
 }

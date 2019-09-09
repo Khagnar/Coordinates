@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface GeoLocationService {
     List<GeoLocationDTO> getAllGeoLocations();
-    void addGeoLocation(GeoLocationDTO geoLocationDTO);
+    GeoLocationDTO addGeoLocation(GeoLocationDTO geoLocationDTO);
     List<GeoLocationDTO> getAllGeoLocationsByCountry(String country);
 }

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import restful.dto.GeoLocationDTO;
 import restful.entity.GeoLocationEntity;
 import restful.repository.GeoLocationRepo;
-import restful.util.DTOMapper;
+import restful.util.DtoEntityConverter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class GeoLocationServiceImpl implements GeoLocationService {
 
     private GeoLocationRepo geoLocationRepo;
-    private DTOMapper mapper = new DTOMapper();
+    private DtoEntityConverter converter = new DtoEntityConverter();
 
     public GeoLocationServiceImpl(GeoLocationRepo geoLocationRepo) {
         this.geoLocationRepo = geoLocationRepo;
@@ -23,14 +23,14 @@ public class GeoLocationServiceImpl implements GeoLocationService {
         List<GeoLocationEntity> listEntity = geoLocationRepo.findAll();
         List<GeoLocationDTO> listDTO = new ArrayList<>();
         for (GeoLocationEntity geoLocationEntity : listEntity) {
-            listDTO.add(mapper.toDTO(geoLocationEntity));
+            listDTO.add(converter.toDTO(geoLocationEntity));
         }
         return listDTO;
     }
 
     @Override
-    public void addGeoLocation(GeoLocationDTO geoLocationDTO) {
-        mapper.toDTO(geoLocationRepo.save(mapper.toEntity(geoLocationDTO)));
+    public GeoLocationDTO addGeoLocation(GeoLocationDTO geoLocationDTO) {
+        return converter.toDTO(geoLocationRepo.save(converter.toEntity(geoLocationDTO)));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class GeoLocationServiceImpl implements GeoLocationService {
         List<GeoLocationEntity> listEntity = geoLocationRepo.findAllByAddress_Country(country);
         List<GeoLocationDTO> listDTO = new ArrayList<>();
         for (GeoLocationEntity geoLocationEntity : listEntity) {
-            listDTO.add(mapper.toDTO(geoLocationEntity));
+            listDTO.add(converter.toDTO(geoLocationEntity));
         }
         return listDTO;
     }
